@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Gem::Specification.new do |s|
   s.name        = 'beaker-hetzner'
   s.version     = '1.0.0'
@@ -9,9 +11,9 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/voxpupuli/beaker-hetzner'
   s.license     = 'AGPL-3.0'
 
-  s.add_development_dependency 'rubocop', '~> 1.25'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
-  s.add_runtime_dependency 'hcloud', '>= 1.0.3', '< 2.0.0'
+  s.add_development_dependency 'rubocop', '~> 1.25'
   s.add_runtime_dependency 'beaker', '~> 4.34'
+  s.add_runtime_dependency 'hcloud', '>= 1.0.3', '< 2.0.0'
 end

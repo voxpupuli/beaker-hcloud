@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec/core/rake_task'
 
 require 'rubocop/rake_task'
@@ -8,9 +10,7 @@ RuboCop::RakeTask.new(:rubocop) do |task|
   # Use Rubocop's Github Actions formatter if possible
   if ENV['GITHUB_ACTIONS'] == 'true'
     rubocop_spec = Gem::Specification.find_by_name('rubocop')
-    if Gem::Version.new(rubocop_spec.version) >= Gem::Version.new('1.2')
-      task.formatters << 'github'
-    end
+    task.formatters << 'github' if Gem::Version.new(rubocop_spec.version) >= Gem::Version.new('1.2')
   end
 end
 
@@ -20,7 +20,7 @@ begin
 
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file."
-    config.exclude_labels = %w{duplicate question invalid wontfix wont-fix skip-changelog modulesync}
+    config.exclude_labels = %w[duplicate question invalid wontfix wont-fix skip-changelog modulesync]
     config.user = 'voxpupuli'
     config.project = 'puppet-lint-topscope-variable-check'
     config.future_release = Gem::Specification.load("#{config.project}.gemspec").version
@@ -29,4 +29,4 @@ rescue LoadError
 end
 
 desc 'r8ubocop'
-task :default => %i[rubocop]
+task default: %i[rubocop]
