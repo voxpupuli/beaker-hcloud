@@ -27,3 +27,6 @@ begin
   end
 rescue LoadError
 end
+
+desc 'r8ubocop'
+task :default => %i[rubocop]
