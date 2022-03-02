@@ -8,3 +8,6 @@ Gemspec/RequireMFA:
 
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
+
+Layout/LineLength:
+  Max: 150
