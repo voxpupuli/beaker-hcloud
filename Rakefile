@@ -28,5 +28,5 @@ begin
 rescue LoadError # rubocop:disable Lint/SuppressedException
 end
 
-desc 'rubocop'
-task default: %i[rubocop]
+RSpec::Core::RakeTask.new(:spec)
+task default: %i[spec]
