@@ -25,7 +25,7 @@ begin
     config.project = 'puppet-lint-topscope-variable-check'
     config.future_release = Gem::Specification.load("#{config.project}.gemspec").version
   end
-rescue LoadError
+rescue LoadError # rubocop:disable Lint/SuppressedException
 end
 
 desc 'rubocop'
