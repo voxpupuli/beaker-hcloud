@@ -40,3 +40,5 @@ jobs:
           bundler-cache: true
       - name: Verify gem builds
         run: gem build *.gemspec
+      - name: Run spec tests
+        run: bundle exec rake
