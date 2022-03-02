@@ -11,6 +11,8 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/voxpupuli/beaker-hetzner'
   s.license     = 'AGPL-3.0'
 
+  s.required_ruby_version = '>= 2.7'
+
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rubocop', '~> 1.25'
