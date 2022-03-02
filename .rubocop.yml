@@ -5,3 +5,6 @@ AllCops:
 
 Gemspec/RequireMFA:
   Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
