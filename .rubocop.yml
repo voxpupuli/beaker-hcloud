@@ -1,0 +1,7 @@
+---
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: enable
+
+Gemspec/RequireMFA:
+  Enabled: false
