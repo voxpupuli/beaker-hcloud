@@ -28,5 +28,5 @@ begin
 rescue LoadError
 end
 
-desc 'r8ubocop'
+desc 'rubocop'
 task default: %i[rubocop]
