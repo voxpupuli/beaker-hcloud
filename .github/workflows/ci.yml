@@ -8,6 +8,17 @@ env:
   BUNDLE_WITHOUT: release
 
 jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Ruby 3.1
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+          bundler-cache: true
+      - name: Run rubocop
+        run: bundle exec rake rubocop
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -29,7 +40,5 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Run tests
-        run: bundle exec rake
       - name: Verify gem builds
         run: gem build *.gemspec
