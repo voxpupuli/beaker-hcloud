@@ -11,3 +11,6 @@ Style/TrailingCommaInArrayLiteral:
 
 Layout/LineLength:
   Max: 150
+
+Metrics/MethodLength:
+  Max: 12
