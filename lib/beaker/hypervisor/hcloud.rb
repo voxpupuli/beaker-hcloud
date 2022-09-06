@@ -13,7 +13,7 @@ module Beaker
 
       raise 'You need to pass a token as HCLOUD_TOKEN environment variable' unless ENV['HCLOUD_TOKEN']
 
-      @client = Hcloud::Client.new(token: ENV['HCLOUD_TOKEN'])
+      @client = Hcloud::Client.new(token: ENV.fetch('HCLOUD_TOKEN'))
     end
 
     def provision
