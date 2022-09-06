@@ -23,4 +23,4 @@ if ENV['COVERAGE'] == 'yes'
   ]
 end
 $LOAD_PATH.unshift File.expand_path('lib', __dir__)
-require 'beaker-hetzner/version'
+require 'beaker-hcloud/version'
