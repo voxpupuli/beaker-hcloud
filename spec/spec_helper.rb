@@ -23,4 +23,7 @@ if ENV['COVERAGE'] == 'yes'
   ]
 end
 $LOAD_PATH.unshift File.expand_path('lib', __dir__)
+
+require 'beaker'
 require 'beaker-hcloud/version'
+require 'beaker/hypervisor/hcloud'

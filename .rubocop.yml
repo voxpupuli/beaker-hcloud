@@ -1,4 +1,7 @@
 ---
+require:
+  - rubocop-rake
+  - rubocop-rspec
 AllCops:
   TargetRubyVersion: 2.7
   NewCops: enable
@@ -11,3 +14,9 @@ Style/TrailingCommaInArrayLiteral:
 
 Layout/LineLength:
   Max: 150
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
