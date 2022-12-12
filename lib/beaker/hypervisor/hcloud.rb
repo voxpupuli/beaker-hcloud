@@ -74,7 +74,7 @@ module Beaker
       location = host[:location] || 'nbg1'
       server_type = host[:server_type] || 'cx11'
       action, server = @client.servers.create(
-        name: host.name,
+        name: host.hostname,
         location: location,
         server_type: server_type,
         image: host[:image],
