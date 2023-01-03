@@ -26,7 +26,7 @@ s.add_runtime_dependency 'beaker-hcloud'
 You need to create an API token using Hetzner's cloud console. Make
 sure to create the token in the correct project.
 
-`beaker-hcloud` expects the token to be in the `HCLOUD_TOKEN`
+`beaker-hcloud` expects the token to be in the `BEAKER_HCLOUD_TOKEN`
 environment variable.
 
 ## Configuration

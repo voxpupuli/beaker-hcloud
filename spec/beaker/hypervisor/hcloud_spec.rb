@@ -89,7 +89,7 @@ describe Beaker::Hcloud do
   end
 
   before do
-    ENV['HCLOUD_TOKEN'] = 'abc'
+    ENV['BEAKER_HCLOUD_TOKEN'] = 'abc'
     allow(::Hcloud::Client).to receive(:new).and_return(hcloud_client)
   end
 

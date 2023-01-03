@@ -16,9 +16,9 @@ module Beaker
       @logger = options[:logger] || Beaker::Logger.new
       @hosts = hosts
 
-      raise 'You need to pass a token as HCLOUD_TOKEN environment variable' unless ENV['HCLOUD_TOKEN']
+      raise 'You need to pass a token as BEAKER_HCLOUD_TOKEN environment variable' unless ENV['BEAKER_HCLOUD_TOKEN']
 
-      @client = ::Hcloud::Client.new(token: ENV.fetch('HCLOUD_TOKEN'))
+      @client = ::Hcloud::Client.new(token: ENV.fetch('BEAKER_HCLOUD_TOKEN'))
     end
 
     def provision
