@@ -90,7 +90,7 @@ describe Beaker::Hcloud do
 
   before do
     ENV['BEAKER_HCLOUD_TOKEN'] = 'abc'
-    allow(::Hcloud::Client).to receive(:new).and_return(hcloud_client)
+    allow(Hcloud::Client).to receive(:new).and_return(hcloud_client)
   end
 
   describe '#provision', :aggregate_failures do
