@@ -7,7 +7,7 @@ require 'ssh_data'
 # ed25519 private keys in OpenSSH format.
 module BeakerHcloud
   module SSHDataPatches
-    # Add encoding methods form OpenSSH's PEM-like format to
+    # Add encoding methods for OpenSSH's PEM-like format to
     # store private keys.
     module EncodingPatch
       def encode_pem(data, type)
@@ -61,6 +61,6 @@ module BeakerHcloud
 end
 
 if defined?(SSHData)
-  SSHData::Encoding.prepend BeakerHcloud::SSHDataPatches::EncodingPatch
+  SSHData::Encoding.extend BeakerHcloud::SSHDataPatches::EncodingPatch
   SSHData::PrivateKey::ED25519.prepend BeakerHcloud::SSHDataPatches::Ed25519PrivateKeyPatch
 end
