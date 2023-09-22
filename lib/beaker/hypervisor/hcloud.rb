@@ -45,7 +45,7 @@ module Beaker
     private
 
     def ssh_key_name
-      safe_hostname = Socket.gethostname.gsub('.', '-')
+      safe_hostname = Socket.gethostname.tr('.', '-')
       [
         'Beaker',
         ENV.fetch('USER', nil),
@@ -63,7 +63,7 @@ module Beaker
       @logger.notify 'Creating hcloud SSH key'
       hcloud_ssh_key = @client.ssh_keys.create(
         name: ssh_key_name,
-        public_key: ssh_key.public_key.openssh(comment: ssh_key_name)
+        public_key: ssh_key.public_key.openssh(comment: ssh_key_name),
       )
       @options[:ssh][:hcloud_id] = hcloud_ssh_key.id
       hcloud_ssh_key
@@ -78,7 +78,7 @@ module Beaker
         location: location,
         server_type: server_type,
         image: host[:image],
-        ssh_keys: [ssh_key_name]
+        ssh_keys: [ssh_key_name],
       )
       while action.status == 'running'
         sleep 5
