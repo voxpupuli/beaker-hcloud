@@ -49,11 +49,11 @@ module BeakerHcloud
       def openssh(comment: '')
         encoded_key = ::SSHData::Encoding.encode_openssh_private_key(
           self,
-          comment
+          comment,
         )
         ::SSHData::Encoding.encode_pem(
           encoded_key,
-          'OPENSSH PRIVATE KEY'
+          'OPENSSH PRIVATE KEY',
         )
       end
     end

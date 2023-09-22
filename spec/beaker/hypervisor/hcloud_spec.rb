@@ -13,13 +13,13 @@ describe Beaker::Hcloud do
         .merge(opts.env_vars)
         .merge({
                  logger: logger_double,
-                 timestamp: Time.now
+                 timestamp: Time.now,
                })
   end
   let(:host1_hash) do
     {
       hypervisor: 'hcloud',
-      image: 'ubuntu-20.04'
+      image: 'ubuntu-20.04',
     }
   end
   let(:host2_hash) do
@@ -27,7 +27,7 @@ describe Beaker::Hcloud do
       hypervisor: 'hcloud',
       image: 'custom image',
       location: 'custom location',
-      server_type: 'custom type'
+      server_type: 'custom type',
     }
   end
   let(:hosts) do
@@ -42,8 +42,8 @@ describe Beaker::Hcloud do
            public_net: {
              'ipv4' => {
                'ip' => '192.168.0.1',
-               'dns_ptr' => 'server1.example.com'
-             }
+               'dns_ptr' => 'server1.example.com',
+             },
            },
            destroy: true)
   end
@@ -53,8 +53,8 @@ describe Beaker::Hcloud do
            public_net: {
              'ipv4' => {
                'ip' => '192.168.0.2',
-               'dns_ptr' => 'server2.example.com'
-             }
+               'dns_ptr' => 'server2.example.com',
+             },
            },
            destroy: true)
   end
@@ -111,14 +111,14 @@ describe Beaker::Hcloud do
                                name: 'Server 1',
                                location: 'nbg1',
                                server_type: 'cx11',
-                               image: 'ubuntu-20.04'
+                               image: 'ubuntu-20.04',
                              }))
       expect(servers_double).to have_received(:create)
         .with(hash_including({
                                name: 'Server 2',
                                location: 'custom location',
                                server_type: 'custom type',
-                               image: 'custom image'
+                               image: 'custom image',
                              }))
     end
     # rubocop:enable RSpec/ExampleLength
