@@ -4,6 +4,11 @@ require 'hcloud'
 require 'ed25519'
 require 'bcrypt_pbkdf'
 
+# required to calculate the VM deletion point
+require 'active_support'
+require 'active_support/time'
+require 'active_support/core_ext/date'
+
 require_relative '../../beaker-hcloud/ssh_data_patches'
 
 module Beaker
@@ -15,10 +20,13 @@ module Beaker
       @options = options
       @logger = options[:logger] || Beaker::Logger.new
       @hosts = hosts
+      @delete_vm_after = ENV.fetch('BEAKER_HCLOUD_DELETE_VM_AFTER', 1).to_i
 
+      raise 'BEAKER_HCLOUD_DELETE_VM_AFTER needs to be a positive integer' unless @delete_vm_after.positive?
       raise 'You need to pass a token as BEAKER_HCLOUD_TOKEN environment variable' unless ENV['BEAKER_HCLOUD_TOKEN']
 
       @client = ::Hcloud::Client.new(token: ENV.fetch('BEAKER_HCLOUD_TOKEN'))
+      delete_servers_if_required
     end
 
     def provision
@@ -69,6 +77,25 @@ module Beaker
       hcloud_ssh_key
     end
 
+    # we need to save the date as unix timestamp. Hetzner Cloud labels only support:
+    # "alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between."
+    # https://docs.hetzner.cloud/#labels
+    def vm_deletion_date
+      (DateTime.current + @delete_vm_after.hours).to_i.to_s
+    end
+
+    # check if a server is too old (delete_vm_after is in the past) and delete it
+    # delete it also if it has no delete_vm_after label. All servers are supposed to have that
+    def delete_server_if_required(server)
+      server.destroy if server.labels['delete_vm_after'] && Time.now > Time.at(server.labels['delete_vm_after'].to_i)
+      server.destroy unless server.labels['delete_vm_after']
+    end
+
+    # iterate through all servers and delete them if required
+    def delete_servers_if_required
+      @client.servers.each { |server| delete_server_if_required(server) }
+    end
+
     def create_server(host)
       @logger.notify "provisioning #{host.name}"
       location = host[:location] || 'nbg1'
@@ -79,6 +106,7 @@ module Beaker
         server_type: server_type,
         image: host[:image],
         ssh_keys: [ssh_key_name],
+        labels: { delete_vm_after: vm_deletion_date },
       )
       while action.status == 'running'
         sleep 5
