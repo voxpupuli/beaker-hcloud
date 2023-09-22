@@ -16,6 +16,11 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.7'
 
+  # Testing dependencies
+  s.add_development_dependency 'rake', '~> 13.0', '>= 13.0.6'
+  s.add_development_dependency 'rspec', '~> 3.12'
+  s.add_development_dependency 'voxpupuli-rubocop', '~> 2.0.0'
+
   s.add_runtime_dependency 'bcrypt_pbkdf', '~> 1.0'
   s.add_runtime_dependency 'beaker', '~> 5.4'
   s.add_runtime_dependency 'ed25519', '~> 1.2'

@@ -1,22 +1,3 @@
 ---
-require:
-  - rubocop-rake
-  - rubocop-rspec
-AllCops:
-  TargetRubyVersion: 2.7
-  NewCops: enable
-
-Gemspec/RequireMFA:
-  Enabled: false
-
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: comma
-
-Layout/LineLength:
-  Max: 150
-
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
+inherit_gem:
+  voxpupuli-rubocop: rubocop.yml
