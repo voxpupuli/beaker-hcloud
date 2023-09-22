@@ -14,10 +14,11 @@ Include this gem alongside Beaker in your Gemfile or project.gemspec. E.g.
 
 ```ruby
 # Gemfile
-gem 'beaker', '~>4.0'
+gem 'beaker', '~> 5.0'
 gem 'beaker-hcloud'
+
 # project.gemspec
-s.add_runtime_dependency 'beaker', '~>4.0'
+s.add_runtime_dependency 'beaker', '~> 5.0'
 s.add_runtime_dependency 'beaker-hcloud'
 ```
 
@@ -38,7 +39,7 @@ are being created:
 | configuration option | required | default | description |
 | -------------------- | -------- | ------- | ----------- |
 | `image`              | true     |         | The name of one of Hetzner's provided images, e.g. `ubuntu-20.04`, or a custom one, i.e. a snapshot in your account. |
-| `server_type`       | false    | `cx11`  | Hetzner cloud server type |
+| `server_type`        | false    | `cx11`  | Hetzner cloud server type |
 | `location`           | false    | `nbg1`  | One of Hetzner's datacenter locations |
 
 # Cleanup
