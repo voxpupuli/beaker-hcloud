@@ -97,6 +97,7 @@ describe Beaker::Hcloud do
     subject(:provision) { hcloud.provision }
 
     before { provision }
+
     after { hcloud.cleanup }
 
     it 'uploads an ssh key using the hcloud client' do
