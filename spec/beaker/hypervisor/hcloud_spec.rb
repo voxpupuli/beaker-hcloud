@@ -45,7 +45,8 @@ describe Beaker::Hcloud do
                'dns_ptr' => 'server1.example.com',
              },
            },
-           destroy: true)
+           destroy: true,
+           labels: { vm_delete_after: '1695385549' })
   end
   let(:server2) do
     double(:server2,
@@ -56,7 +57,8 @@ describe Beaker::Hcloud do
                'dns_ptr' => 'server2.example.com',
              },
            },
-           destroy: true)
+           destroy: true,
+           labels: { vm_delete_after: '1695385549' })
   end
   let(:action_double) do
     double(:action, status: 'success')
