@@ -56,8 +56,6 @@ module Beaker
         @options[:aws_keyname_modifier],
         @options[:timestamp].strftime('%F_%H_%M_%S_%N'),
       ].join('-')
-      @logger.debug("ssh_key_name is: #{safe_hostname}")
-      safe_hostname
     end
 
     def create_ssh_key
