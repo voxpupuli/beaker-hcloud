@@ -85,7 +85,7 @@ module Beaker
       @logger.notify "provisioning #{host.name}"
       location = host[:location] || 'nbg1'
       server_type = host[:server_type] || 'cx11'
-      action, server = @client.servers.create(
+      action, server, _password, _next_action = @client.servers.create(
         name: host.hostname,
         location: location,
         server_type: server_type,
@@ -98,8 +98,8 @@ module Beaker
         action = @client.actions.find(action.id)
         server = @client.servers.find(server.id)
       end
-      host[:ip] = server.public_net['ipv4']['ip']
-      host[:vmhostname] = server.public_net['ipv4']['dns_ptr']
+      host[:ip] = server.public_net['ipv4'].ip
+      host[:vmhostname] = server.public_net['ipv4'].dns_ptr.find { |hash| hash['ip'] == host[:ip] }['dns_ptr']
       host[:hcloud_id] = server.id
       host.options[:ssh][:keys] = [@key_file.path]
       server

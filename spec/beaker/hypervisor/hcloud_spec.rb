@@ -42,7 +42,12 @@ describe Beaker::Hcloud do
            public_net: {
              'ipv4' => {
                'ip' => '192.168.0.1',
-               'dns_ptr' => 'server1.example.com',
+               'dns_ptr' => [
+                 {
+                   'ip' => '192.168.0.1',
+                   'dns_ptr' => 'server1.example.com',
+                 },
+               ],
              },
            },
            destroy: true,
@@ -54,7 +59,12 @@ describe Beaker::Hcloud do
            public_net: {
              'ipv4' => {
                'ip' => '192.168.0.2',
-               'dns_ptr' => 'server2.example.com',
+               'dns_ptr' => [
+                 {
+                   'ip' => '192.168.0.2',
+                   'dns_ptr' => 'server2.example.com',
+                 },
+               ],
              },
            },
            destroy: true,

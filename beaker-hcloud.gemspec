@@ -24,6 +24,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'bcrypt_pbkdf', '~> 1.0'
   s.add_runtime_dependency 'beaker', '~> 5.4'
   s.add_runtime_dependency 'ed25519', '~> 1.2'
-  s.add_runtime_dependency 'hcloud', '~> 1.1'
+  s.add_runtime_dependency 'hcloud', '~> 1.2'
   s.add_runtime_dependency 'ssh_data', '~> 1.3'
 end
