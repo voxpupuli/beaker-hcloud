@@ -44,9 +44,19 @@ are being created:
 
 # Cleanup
 
-In cases where the beaker process is killed before finishing, it may leave resources in Hetzner cloud. These will need to be manually deleted.
+Every created cloud instance gets a label `delete_vm_after: 1698792887`. By
+default this is the UNIX timestamp during VM creation + an hour.
 
-Look for servers in your project named exactly as the ones in your beaker host configuration and SSH keys with names beginning with `Beaker-`.
+You can modify the default of an hour by setting the `BEAKER_HCLOUD_DELETE_VM_AFTER`
+environment variable to any positive integer. It will be interpreted as seconds.
+
+In cases where the beaker process is killed before finishing, it may leave
+resources in Hetzner cloud. These will need to be manually deleted. Look for
+servers in your project named exactly as the ones in your beaker host
+configuration and SSH keys with names beginning with `Beaker-`.
+
+You can also periodically scan for VMs where the `delete_vm_after` points to a
+past timestamp and delete them.
 
 # Contributing
 

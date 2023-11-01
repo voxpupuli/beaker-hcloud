@@ -3,6 +3,7 @@
 require 'hcloud'
 require 'ed25519'
 require 'bcrypt_pbkdf'
+require 'time'
 
 require_relative '../../beaker-hcloud/ssh_data_patches'
 
@@ -15,7 +16,9 @@ module Beaker
       @options = options
       @logger = options[:logger] || Beaker::Logger.new
       @hosts = hosts
+      @delete_vm_after = ENV.fetch('BEAKER_HCLOUD_DELETE_VM_AFTER', 60 * 60).to_i
 
+      raise 'BEAKER_HCLOUD_DELETE_VM_AFTER needs to be a positive integer' unless @delete_vm_after.positive?
       raise 'You need to pass a token as BEAKER_HCLOUD_TOKEN environment variable' unless ENV['BEAKER_HCLOUD_TOKEN']
 
       @client = ::Hcloud::Client.new(token: ENV.fetch('BEAKER_HCLOUD_TOKEN'))
@@ -53,6 +56,8 @@ module Beaker
         @options[:aws_keyname_modifier],
         @options[:timestamp].strftime('%F_%H_%M_%S_%N'),
       ].join('-')
+      @logger.debug("ssh_key_name is: #{safe_hostname}")
+      safe_hostname
     end
 
     def create_ssh_key
@@ -69,6 +74,15 @@ module Beaker
       hcloud_ssh_key
     end
 
+    # we need to save the date as unix timestamp. Hetzner Cloud labels only support:
+    # "alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between."
+    # https://docs.hetzner.cloud/#labels
+    def vm_deletion_date
+      date = (Time.now.to_i + @delete_vm_after).to_s
+      @logger.debug("Server is valid until: #{date}")
+      date
+    end
+
     def create_server(host)
       @logger.notify "provisioning #{host.name}"
       location = host[:location] || 'nbg1'
@@ -79,6 +93,7 @@ module Beaker
         server_type: server_type,
         image: host[:image],
         ssh_keys: [ssh_key_name],
+        labels: { delete_vm_after: vm_deletion_date },
       )
       while action.status == 'running'
         sleep 5
