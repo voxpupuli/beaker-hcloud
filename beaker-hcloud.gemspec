@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   # Testing dependencies
   s.add_development_dependency 'rake', '~> 13.0', '>= 13.0.6'
   s.add_development_dependency 'rspec', '~> 3.12'
-  s.add_development_dependency 'voxpupuli-rubocop', '~> 2.0.0'
+  s.add_development_dependency 'voxpupuli-rubocop', '~> 2.1.0'
 
   s.add_runtime_dependency 'bcrypt_pbkdf', '~> 1.0'
   s.add_runtime_dependency 'beaker', '~> 5.4'
