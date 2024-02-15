@@ -2,6 +2,8 @@
 
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
+gem 'hcloud', git: 'https://github.com/bastelfreak/hcloud-ruby', branch: 'dep'
+
 gemspec
 
 group :coverage, optional: ENV['COVERAGE'] != 'yes' do
